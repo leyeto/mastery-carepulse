@@ -1,5 +1,4 @@
 "use client";
-
 import {
   FormField,
   FormItem,
@@ -12,6 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
 import { FormFieldType } from "../forms/PatientForm";
 import Image from "next/image";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import { useState } from "react";
+import { E164Number } from "libphonenumber-js/min";
 
 interface CustomProps {
   control: Control<any>;
@@ -76,7 +79,18 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           {...field}
         />
       );
-    case FormFieldType.CHECKBOX:
+    case FormFieldType.PHONE_INPUT:
+      const [phone, setPhone] = useState();
+      return (
+        <PhoneInput
+          defaultCountry="GB"
+          placeholder="074 123 456"
+          international
+          withCountryCallingCode
+          value={field.value as E164Number | undefined}
+          onChange={field.onChange}
+        />
+      );
 
     default:
       break;
