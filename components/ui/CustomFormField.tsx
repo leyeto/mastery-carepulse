@@ -80,7 +80,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         />
       );
     case FormFieldType.PHONE_INPUT:
-      const [phone, setPhone] = useState();
+      const [phone, setPhone] = useState<E164Number | undefined>(undefined);
       return (
         <PhoneInput
           defaultCountry="GB"

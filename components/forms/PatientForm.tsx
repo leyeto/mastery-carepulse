@@ -29,11 +29,11 @@ const formSchema = z.object({
 
 const PatientForm = () => {
   // Fixed Hydration error
-  const [isClient, setIsClient] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
+    setIsMounted(true);
   }, []);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,8 +48,10 @@ const PatientForm = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
-    console.log("isClient", isClient);
   }
+
+  if (!isMounted) return null;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
