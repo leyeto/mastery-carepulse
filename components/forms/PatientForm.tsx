@@ -30,6 +30,7 @@ const formSchema = z.object({
 const PatientForm = () => {
   // Fixed Hydration error
   const [isClient, setIsClient] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -81,7 +82,7 @@ const PatientForm = () => {
           label="Mobile Number"
           placeholder="074 123 4567"
         />
-        <SubmitButton isLoading={isLoading} />
+        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
   );
