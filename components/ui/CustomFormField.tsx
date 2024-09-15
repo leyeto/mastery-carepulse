@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
 import { FormFieldType } from "../forms/PatientForm";
+import Image from "next/image";
 
 interface CustomProps {
   control: Control<any>;
@@ -19,7 +20,7 @@ interface CustomProps {
   label?: string;
   placeholder?: string;
   iconSrc?: string;
-  iconAlt?: string;
+  iconAlt?: string | undefined;
   disabled?: boolean;
   dateFormat?: string;
   showTimeSelect?: boolean;
@@ -28,7 +29,58 @@ interface CustomProps {
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
-  return <Input type="text" placeholder="John Doe" />;
+  const {
+    control,
+    fieldType,
+    name,
+    placeholder,
+    iconSrc,
+    iconAlt,
+    disabled,
+    dateFormat,
+    showTimeSelect,
+    children,
+    renderSkeleton,
+  } = props;
+
+  switch (props.fieldType) {
+    case FormFieldType.INPUT:
+      return (
+        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+          {iconSrc && (
+            <Image
+              src={iconSrc}
+              alt={iconAlt || "icon"}
+              width={24}
+              height={24}
+              className="ml-2"
+            />
+          )}
+
+          <FormControl>
+            <Input
+              placeholder={placeholder}
+              disabled={disabled}
+              {...field}
+              className="shad-input border-0"
+            />
+          </FormControl>
+        </div>
+      );
+    case FormFieldType.TEXTAREA:
+      return (
+        <Input
+          type="textarea"
+          placeholder={props.placeholder}
+          disabled={props.disabled}
+          {...field}
+        />
+      );
+    case FormFieldType.CHECKBOX:
+
+    default:
+      break;
+  }
 };
 
 const CustomFormField = (props: CustomProps) => {
