@@ -11,10 +11,12 @@ import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
 import { FormFieldType } from "../forms/PatientForm";
 import Image from "next/image";
-import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { useState } from "react";
 import { E164Number } from "libphonenumber-js/min";
+import DatePicker from "react-datepicker";
+
+import "react-phone-number-input/style.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface CustomProps {
   control: Control<any>;
@@ -80,7 +82,6 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         />
       );
     case FormFieldType.PHONE_INPUT:
-      const [phone, setPhone] = useState<E164Number | undefined>(undefined);
       return (
         <PhoneInput
           defaultCountry="GB"
@@ -89,9 +90,32 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           withCountryCallingCode
           value={field.value as E164Number | undefined}
           onChange={field.onChange}
+          className="input-phone"
         />
       );
 
+    case FormFieldType.DATE_PICKER:
+      return (
+        <div className="flex rounded-md border-dark-500 bg-dark-400">
+          <Image
+            src="/assets/icons/calendar.svg"
+            alt="calendar"
+            width={24}
+            height={24}
+            className="ml-2"
+          />
+          <FormControl>
+            <DatePicker
+              selected={field.value}
+              onChange={(date) => field.onChange(date)}
+              dateFormat={dateFormat ?? "dd/MM/yyyy"}
+              showTimeSelect={showTimeSelect ?? false}
+              timeInputLabel="Time:"
+              wrapperClassName="date-picker"
+            />
+          </FormControl>
+        </div>
+      );
     default:
       break;
   }
