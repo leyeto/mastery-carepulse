@@ -160,7 +160,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="emergencyContactName"
-            label="Emergency Contact"
+            label="Emergency Contact Name"
             placeholder="Guardian's name"
           />
 
