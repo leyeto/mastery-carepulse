@@ -3,7 +3,6 @@ import {
   FormField,
   FormItem,
   FormControl,
-  FormDescription,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
@@ -17,22 +16,27 @@ import DatePicker from "react-datepicker";
 
 import "react-phone-number-input/style.css";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+} from "@radix-ui/react-select";
 
 interface CustomProps {
   control: Control<any>;
-  fieldType: FormFieldType;
   name: string;
   label?: string;
   placeholder?: string;
   iconSrc?: string;
-  iconAlt?: string | undefined;
+  iconAlt?: string;
   disabled?: boolean;
   dateFormat?: string;
   showTimeSelect?: boolean;
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
+  fieldType: FormFieldType;
 }
-
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const {
     control,
@@ -48,7 +52,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     renderSkeleton,
   } = props;
 
-  switch (props.fieldType) {
+  switch (fieldType) {
     case FormFieldType.INPUT:
       return (
         <div className="flex rounded-md border border-dark-500 bg-dark-400">
@@ -76,8 +80,8 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       return (
         <Input
           type="textarea"
-          placeholder={props.placeholder}
-          disabled={props.disabled}
+          placeholder={placeholder}
+          disabled={disabled}
           {...field}
         />
       );
@@ -117,10 +121,25 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         </div>
       );
 
+    case FormFieldType.SELECT:
+      return (
+        <FormControl>
+          <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+              <SelectTrigger className="shad-select-trigger">
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent className="shad-select-content">
+              {children}
+            </SelectContent>
+          </Select>
+        </FormControl>
+      );
     case FormFieldType.SKELETON:
       return renderSkeleton ? renderSkeleton(field) : null;
     default:
-      break;
+      return null;
   }
 };
 
