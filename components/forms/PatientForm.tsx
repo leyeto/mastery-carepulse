@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import CustomFormField from "../ui/CustomFormField";
+import CustomFormField from "../CustomFormField";
 import { useEffect, useState } from "react";
 import SubmitButton from "../SubmitButton";
 import { UserFormValidation } from "@/lib/validation";
