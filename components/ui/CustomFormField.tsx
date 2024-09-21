@@ -16,12 +16,7 @@ import DatePicker from "react-datepicker";
 
 import "react-phone-number-input/style.css";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  Select,
-  SelectContent,
-  SelectTrigger,
-  SelectValue,
-} from "@radix-ui/react-select";
+import { Select, SelectContent, SelectTrigger, SelectValue } from "./select";
 
 interface CustomProps {
   control: Control<any>;
