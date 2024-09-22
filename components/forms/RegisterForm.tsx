@@ -23,7 +23,7 @@ import "react-phone-number-input/style.css";
 import CustomFormField from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { PatientFormValidation } from "@/lib/validation";
-import { createUser } from "@/lib/actions/patient.actions";
+import { createUser, registerPatient } from "@/lib/actions/patient.actions";
 import { FormFieldType } from "./PatientForm";
 import { FileUploader } from "../FileUploader";
 
@@ -75,6 +75,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         identificationDocument: formData,
       };
 
+      // @ts-ignore
       const patient = await registerPatient(patientData);
       if (patient) router.push(`/patients/${patient.$id}/new-appointment`);
     } catch (error) {
