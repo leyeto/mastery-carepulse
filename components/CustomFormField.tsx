@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
-import { FormFieldType } from "./forms/PatientForm";
 import Image from "next/image";
 import PhoneInput from "react-phone-number-input";
 import { E164Number } from "libphonenumber-js/min";
@@ -34,6 +33,17 @@ interface CustomProps {
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
   fieldType: FormFieldType;
+}
+
+export enum FormFieldType {
+  INPUT = "input",
+  TEXTAREA = "textarea",
+  CHECKBOX = "checkbox",
+  RADIO = "radio",
+  SELECT = "select",
+  PHONE_INPUT = "phoneInput",
+  DATE_PICKER = "datePicker",
+  SKELETON = "skeleton",
 }
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const {

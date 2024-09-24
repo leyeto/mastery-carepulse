@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { FormFieldType } from "@/components/CustomFormField";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "../CustomFormField";
 import { useEffect, useState } from "react";
@@ -10,17 +11,6 @@ import SubmitButton from "../SubmitButton";
 import { UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
-
-export enum FormFieldType {
-  INPUT = "input",
-  TEXTAREA = "textarea",
-  CHECKBOX = "checkbox",
-  RADIO = "radio",
-  SELECT = "select",
-  PHONE_INPUT = "phoneInput",
-  DATE_PICKER = "datePicker",
-  SKELETON = "skeleton",
-}
 
 const PatientForm = () => {
   const router = useRouter();

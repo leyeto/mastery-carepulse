@@ -24,7 +24,7 @@ import CustomFormField from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { PatientFormValidation } from "@/lib/validation";
 import { createUser, registerPatient } from "@/lib/actions/patient.actions";
-import { FormFieldType } from "./PatientForm";
+import { FormFieldType } from "../CustomFormField";
 import { FileUploader } from "../FileUploader";
 
 const RegisterForm = ({ user }: { user: User }) => {

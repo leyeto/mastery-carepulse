@@ -1,10 +1,12 @@
 import Copyright from "@/components/Copyright";
-import PatientForm from "@/components/forms/PatientForm";
-import { Button } from "@/components/ui/button";
+import AppointmentForm from "@/components/forms/AppointmentForm";
+import { getPatient } from "@/lib/actions/patient.actions";
 import Image from "next/image";
-import Link from "next/link";
 
-export default function NewAppointment() {
+const Appointment = async ({ params }: SearchParamProps) => {
+  const { userId } = params;
+  const patient = await getPatient(userId);
+
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
@@ -16,7 +18,11 @@ export default function NewAppointment() {
             alt="patient"
             className="mb-12 h-10 w-fit"
           />
-          {/* <AppointmentForm /> */}
+          <AppointmentForm
+            type="create"
+            userId={userId}
+            patientId={patient?.$id}
+          />
           <Copyright />
         </div>
       </section>
@@ -29,4 +35,6 @@ export default function NewAppointment() {
       />
     </div>
   );
-}
+};
+
+export default Appointment;
