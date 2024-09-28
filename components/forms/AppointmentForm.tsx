@@ -56,12 +56,12 @@ const AppointmentForm = ({
       case "schedule":
         status = "scheduled";
         break;
-      case "cancel":
-        status = "cancelled";
-        break;
 
       case "create":
-        status = "created";
+        status = "pending";
+        break;
+      case "cancel":
+        status = "cancelled";
         break;
 
       default:
@@ -103,18 +103,14 @@ const AppointmentForm = ({
   switch (type) {
     case "cancel":
       buttonLabel = "Cancel Appointment";
-
       break;
-    case "create":
-      buttonLabel = "Request Appointment";
 
-      break;
     case "schedule":
       buttonLabel = "Schedule Appointment";
-
       break;
 
     default:
+      buttonLabel = "Request Appointment";
       break;
   }
 
