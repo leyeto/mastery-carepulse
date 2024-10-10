@@ -77,9 +77,9 @@ const RegisterForm = ({ user }: { user: User }) => {
 
       // @ts-ignore
       const patient = await registerPatient(patientData);
-      if (patient) router.push(`/patients/${patient.$id}/new-appointment`);
+      if (patient) router.push(`/patients/${user.$id}/new-appointment`);
     } catch (error) {
-      console.log(error);
+      console.log("An error occurred in RegisterForm.onSubmit:", error);
     }
 
     setIsLoading(false);
